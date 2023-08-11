@@ -16,7 +16,7 @@ class ServerRequest extends FormRequest
         return [
             'event' => 'required',
             'model_type' => 'required|string',
-            'model_id' => 'required',
+            'model_id' => 'nullable',
             'halt' => 'required|bool',
         ];
     }
