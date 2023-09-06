@@ -17,6 +17,7 @@ class ServerRequest extends FormRequest
             'event' => 'required',
             'model_type' => 'required|string',
             'model_id' => 'nullable',
+            'changes' => 'array|nullable',
             'halt' => 'required|bool',
         ];
     }
