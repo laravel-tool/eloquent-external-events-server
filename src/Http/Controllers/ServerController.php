@@ -14,6 +14,8 @@ class ServerController extends BaseController
             $request->input('event'),
             $request->input('model_type'),
             $request->input('model_id'),
+            $request->input('attributes'),
+            $request->input('originals'),
             $request->input('changes'),
             $request->input('halt')
         );
