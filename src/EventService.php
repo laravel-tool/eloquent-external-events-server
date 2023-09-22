@@ -15,8 +15,12 @@ class EventService
         array|null $changes,
         bool $halt
     ) {
+        if (is_null($modelId)) {
+            $model = new $modelType;
+        } else {
+            $model = $modelType::find($modelId);
+        }
         /** @var Model $model */
-        $model = $modelType::find($modelId);
         if (method_exists($model, 'fireEvent')) {
             return $model->fireEvent($event, $attributes, $originals, $changes, $halt);
         }
