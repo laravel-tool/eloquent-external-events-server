@@ -15,7 +15,7 @@ class EventService
         array|null $changes,
         bool $halt
     ) {
-        if (is_null($modelId)) {
+        if (is_null($modelId) || in_array($event, ['deleted', 'forceDeleted'])) {
             $model = new $modelType;
         } else {
             $model = $modelType::find($modelId);
