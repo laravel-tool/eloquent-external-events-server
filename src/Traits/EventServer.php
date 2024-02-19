@@ -4,10 +4,10 @@ namespace LaravelTool\EloquentExternalEventsServer\Traits;
 
 trait EventServer
 {
-    public function fireEvent($event, $attributes, $originals, $changes, $halt)
+    public function fireEvent($event, $attributes, $original, $changes, $halt)
     {
         $this->attributes = $attributes;
-        $this->originals = $originals;
+        $this->original = $original;
         $this->changes = $changes;
 
         return $this->fireModelEvent($event, $halt);
