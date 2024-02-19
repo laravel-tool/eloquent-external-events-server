@@ -3,7 +3,7 @@
   "description": "Eloquent external events server side library",
   "type": "laravel-plugin",
   "license": "MIT",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "authors": [
     {
       "name": "Yuriy Potemkin",
