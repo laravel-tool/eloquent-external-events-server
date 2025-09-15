@@ -3,6 +3,7 @@
 namespace LaravelTool\EloquentExternalEventsServer;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventService
 {
@@ -18,10 +19,16 @@ class EventService
         if (is_null($modelId) || in_array($event, ['deleted', 'forceDeleted'])) {
             $model = new $modelType;
         } else {
-            $model = $modelType::withTrashed()->find($modelId);
+            // Проверка на использование SoftDeletes (эквивалент "наличия withTrashed")
+            $usesSoftDeletes = in_array(SoftDeletes::class, class_uses_recursive($modelType), true);
+            $query = $modelType::query();
+            if ($usesSoftDeletes) {
+                $query->withTrashed();
+            }
+            $model = $query->find($modelId);
         }
         /** @var Model $model */
-        if (method_exists($model, 'fireEvent')) {
+        if ($model && method_exists($model, 'fireEvent')) {
             return $model->fireEvent($event, $attributes, $originals, $changes, $halt);
         }
         return [];
